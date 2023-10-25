@@ -46,27 +46,15 @@ export const MainContainer = styled.div`
 
     .itemsContainer {
       margin-top: 4.125rem;
-    }
-
-    .item {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      gap: 2.5rem;
 
-      span {
-        width: 32px;
-        height: 32px;
+      .infoItemsContainer {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        color: ${(props) => props.theme.colors.background};
-        background-color: ${(props) => props.theme.colors.yellowDark};
-      }
+        align-items: start;
 
-      p {
-        font-size: ${(props) => props.theme.text.m};
+        flex-direction: column;
+        gap: 1.25rem;
       }
     }
   }
