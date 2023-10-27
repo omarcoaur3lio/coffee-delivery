@@ -1,42 +1,27 @@
 import styled from "styled-components";
+import Background from "../../assets/background.png";
 
-export const MainContainer = styled.div`
-  margin: auto;
-  /* background-color: #ff0; */
-  height: calc(100vh - 118px);
-  margin: auto 10rem;
-  display: grid;
-  grid-template-columns: 55% 1fr;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3.5rem;
+export const LandingContainer = styled.div`
+  background: url(${Background}) no-repeat center;
+  background-size: cover;
+  min-width: 1366px;
+  padding-top: 5.875rem;
+  padding-bottom: 6.75rem;
 
-  .mainContentContainer {
-    /* background-color: #f00; */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+  .contentContainer {
+    margin: auto 15rem;
 
-    img {
-      width: 100%;
-    }
-  }
-  .textContainer {
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+    display: grid;
+    grid-template-columns: 66% 1fr;
 
     h1 {
-      font-family: "Baloo 2", sans-serif;
-      font-weight: 900;
-      max-width: 588px;
       font-size: ${(props) => props.theme.title.xl};
       color: ${(props) => props.theme.colors.baseTitle};
+      max-width: 588px;
       line-height: 130%;
     }
 
-    h1 + p {
+    .subtitle {
       color: ${(props) => props.theme.colors.baseSubtitle};
       font-size: ${(props) => props.theme.text.l};
       margin-top: 1rem;
@@ -57,5 +42,16 @@ export const MainContainer = styled.div`
         gap: 1.25rem;
       }
     }
+  }
+`;
+
+export const ProductsContainer = styled.div`
+  margin: auto 15rem;
+  min-width: 1366px;
+  margin-bottom: 8rem;
+
+  h2 {
+    margin: 2.5rem 0 3.375rem;
+    font-size: ${(props) => props.theme.title.l};
   }
 `;

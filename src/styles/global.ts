@@ -22,4 +22,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: ${(props) => props.theme.text.m};
   }
 
+  h1, h2, h3, h4 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    color: ${(props) => props.theme.colors.baseSubtitle};
+  }
+
 `;
