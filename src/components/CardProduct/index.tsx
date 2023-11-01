@@ -1,29 +1,30 @@
-// import Expresso from '../../assets/products/Expresso.png';
-import Cubano from "../../assets/products/Cubano.png";
 import { ShoppingCart } from "@phosphor-icons/react";
 import { CardContainer } from "./styles";
-import { CounterButton } from "../CounterButton";
+import { InputNumber } from "../InputNumber";
+import { Product } from "../../../products";
 
-export function CardProduct() {
+interface CardProductProps {
+  product: Product;
+}
+
+export function CardProduct({ product }: CardProductProps) {
   return (
     <CardContainer>
-      <img src={Cubano} alt="" />
+      <img src={product.image} alt="" />
       <div className="tagContainer">
-        <span>ESPECIAL</span>
-        <span>ALCOÓLICO</span>
-        <span>GELADO</span>
-        <span>GELADO</span>
-        <span>GELADO</span>
+        {product.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
       </div>
-      <h3>Cubano</h3>
-      <p>Drink gelado de café expresso com rum, creme de leite e hortelã</p>
+      <h3>{product.name}</h3>
+      <p>{product.description}</p>
       <footer>
         <div>
           <span>R$</span>
-          <h4>9,90</h4>
+          <h4>{product.price}</h4>
         </div>
         <div>
-          <CounterButton />
+          <InputNumber />
           <div className="cart">
             <ShoppingCart weight="fill" size={22} />
           </div>

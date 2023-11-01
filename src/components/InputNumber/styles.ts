@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CounterButtonContainer = styled.div`
+export const InputNumberContainer = styled.div`
   display: flex;
   height: 38px;
   border-radius: 6px;
@@ -24,14 +24,17 @@ export const CounterButtonContainer = styled.div`
 
     cursor: pointer;
 
-    transition: opacity 0.2s;
-
+    
     svg {
       fill: ${(props) => props.theme.colors.purple};
+      transition: fill 0.2s;
     }
-
+    
     &:hover {
-      opacity: 0.7;
+      svg {
+        fill: ${(props) => props.theme.colors.purpleDark};        
+      }
+
     }
 
     &:disabled {

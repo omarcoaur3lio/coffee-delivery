@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Minus, Plus } from "@phosphor-icons/react";
-import { CounterButtonContainer } from "./styles";
+import { InputNumberContainer } from "./styles";
 
-export function CounterButton() {
+export function InputNumber() {
   const [count, setCount] = useState(0);
   return (
-    <CounterButtonContainer>
+    <InputNumberContainer>
       <button onClick={() => setCount(count - 1)} disabled={count === 0}>
         <Minus weight="bold" size={14} />
       </button>
@@ -13,6 +13,6 @@ export function CounterButton() {
       <button onClick={() => setCount(count + 1)}>
         <Plus weight="bold" size={14} />
       </button>
-    </CounterButtonContainer>
+    </InputNumberContainer>
   );
 }

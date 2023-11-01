@@ -54,4 +54,11 @@ export const ProductsContainer = styled.div`
     margin: 2.5rem 0 3.375rem;
     font-size: ${(props) => props.theme.title.l};
   }
+
+  .productsListContainer {
+    display: flex;
+    justify-content: space-start;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
 `;

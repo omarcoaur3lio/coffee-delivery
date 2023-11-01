@@ -6,8 +6,6 @@ export const CardContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* text-align: center; */
-
   background-color: ${(props) => props.theme.colors.baseCard};
   width: 256px;
   padding: 0 1.5rem 1.5rem;

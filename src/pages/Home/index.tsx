@@ -5,7 +5,15 @@ import { LandingContainer, ProductsContainer } from "./styles";
 import { ItemIcon } from "../../components/ItemIcon";
 import { useTheme } from "styled-components";
 import { CardProduct } from "../../components/CardProduct";
+import { useEffect, useState } from "react";
+import { ProductList, Product } from "../../../products";
 export function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    setProducts(ProductList);
+  }, []);
+
   const theme = useTheme();
   return (
     <>
@@ -60,7 +68,11 @@ export function Home() {
       </LandingContainer>
       <ProductsContainer>
         <h2>Nossos cafés</h2>
-        <CardProduct />
+        <div className="productsListContainer">
+          {products.map((product) => (
+            <CardProduct key={product.id} product={product} />
+          ))}
+        </div>
       </ProductsContainer>
     </>
   );
