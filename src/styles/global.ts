@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -27,5 +27,9 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 800;
     color: ${(props) => props.theme.colors.baseSubtitle};
   }
-
 `;
+
+export const Container = styled.div`
+  min-width: 1366px;
+  margin: auto 15rem;
+`

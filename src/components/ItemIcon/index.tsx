@@ -2,7 +2,7 @@ import { IconContainer } from "./styles";
 
 interface ItemIconProps {
   color: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }
 
