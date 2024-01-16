@@ -1,11 +1,11 @@
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "./styles/theme/default";
+import { BrowserRouter } from "react-router-dom";
 // import { Button } from "./Button";
 // import { useState } from "react";
 // import { Dark } from "./styles/theme/dark";
 import { GlobalStyle } from "./styles/global";
-import { Home } from "./pages/Home";
-import { Header } from "./components/Header";
+import { Router } from "./Router";
 
 export function App() {
   // const [dark, setDark] = useState(false)
@@ -13,11 +13,12 @@ export function App() {
   return (
     // <ThemeProvider theme={dark ? Dark : defaultTheme}>
     <ThemeProvider theme={defaultTheme}>
-      <GlobalStyle />
-      <Header />
-      <Home />
-      {/* <Button /> */}
-      {/* <button onClick={() => setDark(!dark)}>{!dark ? "Dark" : "Light"}</button> */}
+        <GlobalStyle />
+      <BrowserRouter>
+        <Router />
+        {/* <Button /> */}
+        {/* <button onClick={() => setDark(!dark)}>{!dark ? "Dark" : "Light"}</button> */}
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
