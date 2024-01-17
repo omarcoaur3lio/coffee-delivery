@@ -1,7 +1,7 @@
 import { Container } from "../../styles/global";
 import { ContentContainer } from "./styles";
 
-import deliveryImg from "../../assets/delivery.png";
+import deliveryImg from "../../assets/delivery.svg";
 import { ItemIcon } from "../../components/ItemIcon";
 
 import { useTheme } from "styled-components";

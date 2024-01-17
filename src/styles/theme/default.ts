@@ -36,6 +36,11 @@ export const defaultTheme = {
     m: '1rem',
     s: '0.875rem',
     xs: '0.75rem',
+  },
+
+  button: {
+    g: '0.875rem',
+    m: '0.75rem',
   }
     
 }

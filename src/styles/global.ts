@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.purple};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.purple}; 
   }
 
   body, input, textarea, button {
@@ -27,6 +27,16 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 800;
     color: ${(props) => props.theme.colors.baseSubtitle};
   }
+
+  button {
+    cursor: pointer;
+    border: 0;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
 `;
 
 export const Container = styled.div`
