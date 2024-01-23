@@ -7,11 +7,16 @@ interface ButtonProps {
   children?: React.ReactNode;
 }
 
-export function Button({ title, handleOnClick, variant, children }: ButtonProps) {
+export function Button({
+  title,
+  handleOnClick,
+  variant,
+  children,
+}: ButtonProps) {
   return (
-    <ButtonContainer variant={variant} onClick={() => handleOnClick}>
-      { variant === "secondary" && children}
+    <ButtonContainer variant={variant} onClick={handleOnClick}>
+      {variant === "secondary" && children}
       {title}
     </ButtonContainer>
-  )
+  );
 }

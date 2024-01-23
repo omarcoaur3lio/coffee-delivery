@@ -7,9 +7,26 @@ import { PaymentMethodsForm } from "../../components/PaymentMethodsForm";
 import { Input } from "../../components/Input";
 import { CartItemDescription } from "../../components/CartItemDescription";
 import { Button } from "../../components/Button";
+import { CartContext } from "../../context/CartContext";
+import { useContext, useEffect } from "react";
 
 export function Checkout() {
   const theme = useTheme();
+
+  const { cart, getTotalProductsPrice } = useContext(CartContext);
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
+
+  function getTotal() {
+    const total = Number(getTotalProductsPrice().replace(",", ".")) + 3.5;
+    if (total === 3.5) {
+      return "0,00";
+    }
+    const formattedTotal = total.toFixed(2).replace(".", ",");
+    return formattedTotal;
+  }
 
   return (
     <Container>
@@ -61,13 +78,18 @@ export function Checkout() {
           <h3>Cafés selecionados</h3>
 
           <div className="cartContentCard">
-            <CartItemDescription />
+            {cart.map((product) => (
+              <CartItemDescription
+                key={product.productId}
+                productId={product.productId}
+              />
+            ))}
             <div className="separator" />
 
             <div className="totalContainer">
               <div>
                 <p>Total de itens</p>
-                <p>R$ 29,70</p>
+                <p>R$ {getTotalProductsPrice()}</p>
               </div>
               <div>
                 <p>Entrega</p>
@@ -75,7 +97,7 @@ export function Checkout() {
               </div>
               <div>
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                <span>R$ {getTotal()}</span>
               </div>
             </div>
 

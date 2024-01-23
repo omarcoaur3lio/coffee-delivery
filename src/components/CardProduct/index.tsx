@@ -1,7 +1,7 @@
 import { ShoppingCart } from "@phosphor-icons/react";
 import { CardContainer } from "./styles";
 import { InputNumber } from "../InputNumber";
-import { Product } from "../../../products";
+import { Product } from "../../api/products";
 
 interface CardProductProps {
   product: Product;
@@ -24,7 +24,7 @@ export function CardProduct({ product }: CardProductProps) {
           <h4>{product.price}</h4>
         </div>
         <div>
-          <InputNumber />
+          <InputNumber productId={product.id} />
           <div className="cart">
             <ShoppingCart weight="fill" size={22} />
           </div>

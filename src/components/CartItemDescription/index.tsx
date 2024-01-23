@@ -1,25 +1,54 @@
 import { CartItemContainer } from "./style";
-import coffeeImg from "../../assets/products/Expresso.png";
 import { InputNumber } from "../InputNumber";
 import { Button } from "../Button";
 import { Trash } from "@phosphor-icons/react";
+import { ProductList } from "../../api/products";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../context/CartContext";
 
-export function CartItemDescription() {
+interface CartItemProps {
+  productId: number;
+}
+
+export function CartItemDescription({ productId }: CartItemProps) {
+  const [productName, setProductName] = useState("");
+  const [productImage, setProductImage] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+
+  const { removeAllProducts } = useContext(CartContext);
+
+  useEffect(() => {
+    getProductDetails(productId);
+  });
+
+  function getProductDetails(productId: number) {
+    const product = ProductList.find((item) => item.id === productId);
+    if (product) {
+      setProductName(product.name);
+      setProductImage(product.image);
+      setProductPrice(product.price);
+    }
+  }
+
   return (
     <CartItemContainer>
       <div className="itemContainer">
-        <img src={coffeeImg} width={64} alt="Imagem do seu café" />
+        <img src={productImage} width={64} alt="Imagem do seu café" />
         <div className="itemInfo">
-          <span>Expresso tradicional</span>
+          <span>{productName}</span>
           <div className="itemQuantity">
-            <InputNumber />
-            <Button variant="secondary" title="Remover">
+            <InputNumber productId={productId} />
+            <Button
+              variant="secondary"
+              title="Remover"
+              handleOnClick={() => removeAllProducts(productId)}
+            >
               <Trash size={16} />
             </Button>
           </div>
         </div>
       </div>
-      <span className="price">R$ 9,90</span>
+      <span className="price">R$ {productPrice}</span>
     </CartItemContainer>
   );
 }

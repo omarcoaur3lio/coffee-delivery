@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 // import { Dark } from "./styles/theme/dark";
 import { GlobalStyle } from "./styles/global";
 import { Router } from "./Router";
+import { CartContextProvider } from "./context/CartContext";
 
 export function App() {
   // const [dark, setDark] = useState(false)
@@ -13,9 +14,11 @@ export function App() {
   return (
     // <ThemeProvider theme={dark ? Dark : defaultTheme}>
     <ThemeProvider theme={defaultTheme}>
-        <GlobalStyle />
+      <GlobalStyle />
       <BrowserRouter>
-        <Router />
+        <CartContextProvider>
+          <Router />
+        </CartContextProvider>
         {/* <Button /> */}
         {/* <button onClick={() => setDark(!dark)}>{!dark ? "Dark" : "Light"}</button> */}
       </BrowserRouter>

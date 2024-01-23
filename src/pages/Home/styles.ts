@@ -9,7 +9,8 @@ export const LandingContainer = styled.div`
   padding-bottom: 6.75rem;
 
   .contentContainer {
-    margin: auto 15rem;
+    margin: 0 15rem;
+    margin-top: 8rem;
 
     display: grid;
     grid-template-columns: 66% 1fr;

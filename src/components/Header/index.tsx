@@ -1,8 +1,9 @@
-import { MapPin, ShoppingCart } from "@phosphor-icons/react";
+import { MapPin } from "@phosphor-icons/react";
 import { HeaderContainer } from "./styles";
 
 import Logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { Cart } from "../Cart";
 
 export function Header() {
   return (
@@ -16,10 +17,7 @@ export function Header() {
           Porto Alegre, RS
         </div>
         <Link to="/checkout">
-          <div className="cart">
-            <ShoppingCart weight="fill" size={22} />
-            <span>2</span>
-          </div>
+          <Cart />
         </Link>
       </div>
     </HeaderContainer>

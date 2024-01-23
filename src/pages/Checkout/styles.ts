@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
-  margin-top: 2.5rem;
   display: flex;
   gap: 2rem;
 
@@ -11,6 +10,7 @@ export const CheckoutContainer = styled.div`
   }
 
   .formContainer {
+    margin-top: 9rem;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -56,6 +56,7 @@ export const CheckoutContainer = styled.div`
   }
 
   .cartContentContainer {
+    margin-top: 9rem;
     width: 40%;
 
     .cartContentCard {

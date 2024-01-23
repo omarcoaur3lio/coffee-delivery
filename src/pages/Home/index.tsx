@@ -6,7 +6,8 @@ import { ItemIcon } from "../../components/ItemIcon";
 import { useTheme } from "styled-components";
 import { CardProduct } from "../../components/CardProduct";
 import { useEffect, useState } from "react";
-import { ProductList, Product } from "../../../products";
+import { Product, ProductList } from "../../api/products";
+
 export function Home() {
   const [products, setProducts] = useState<Product[]>([]);
 
