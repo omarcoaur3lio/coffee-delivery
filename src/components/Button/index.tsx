@@ -1,6 +1,6 @@
 import { ButtonContainer } from "./styles";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   handleOnClick?: () => void;
   variant: "primary" | "secondary";
@@ -12,9 +12,10 @@ export function Button({
   handleOnClick,
   variant,
   children,
+  ...props
 }: ButtonProps) {
   return (
-    <ButtonContainer variant={variant} onClick={handleOnClick}>
+    <ButtonContainer variant={variant} onClick={handleOnClick} {...props}>
       {variant === "secondary" && children}
       {title}
     </ButtonContainer>

@@ -32,6 +32,7 @@ export const InputContainer = styled.div<InputProps>`
       outline: none;
       box-shadow: 0 0 0 0;
     }
+
   }
 
   span {

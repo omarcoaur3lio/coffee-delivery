@@ -47,6 +47,71 @@ export const CheckoutContainer = styled.div`
         flex-direction: column;
         gap: 1rem;
 
+        .input {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: space-between;
+          background-color: ${(props) => props.theme.colors.baseInput};
+          border: 1px solid ${(props) => props.theme.colors.baseButton};
+          border-radius: 4px;
+          padding: 0.75rem;
+          font-size: ${(props) => props.theme.text.m};
+          line-height: 160%;
+          color: ${(props) => props.theme.colors.baseText};
+
+          span {
+            font-style: italic;
+            color: ${(props) => props.theme.colors.baseLabel};
+            font-size: ${(props) => props.theme.text.xs};
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+
+          &::placeholder {
+            color: ${(props) => props.theme.colors.baseLabel};
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 0;
+          }
+
+          &:focus-within {
+            border: 1px solid ${(props) => props.theme.colors.yellowDark};
+          }
+        }
+
+        .inputShort {
+          width: 12.5rem;
+        }
+
+        .inputExtraShort {
+          width: 3.5rem;
+          text-transform: uppercase;
+        }
+
+        .inputOptional {
+          background-color: transparent;
+          border: 0;
+          font-size: ${(props) => props.theme.text.m};
+          line-height: 160%;
+          color: ${(props) => props.theme.colors.baseText};
+          width: 100%;
+
+          &::placeholder {
+            color: ${(props) => props.theme.colors.baseLabel};
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 0;
+          }
+        }
+
         div {
           display: flex;
           gap: 0.75rem;
@@ -58,6 +123,29 @@ export const CheckoutContainer = styled.div`
   .cartContentContainer {
     margin-top: 9rem;
     width: 40%;
+
+    .emptyCartContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        margin-top: 1rem;
+        font-size: ${(props) => props.theme.text.m};
+        color: ${(props) => props.theme.colors.baseLabel};
+
+        &:last-child {
+          margin-top: 0.25rem;
+        }
+
+        .link {
+          text-decoration: none;
+          color: ${(props) => props.theme.colors.yellowDark};
+          font-weight: bold;
+        }
+      }
+    }
 
     .cartContentCard {
       margin-top: 0.75rem;

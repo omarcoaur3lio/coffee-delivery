@@ -16,6 +16,7 @@ interface CartContextType {
   removeProduct: (productId: number) => void;
   removeAllProducts: (productId: number) => void;
   getTotalProductsPrice: () => string;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext({} as CartContextType);
@@ -53,8 +54,11 @@ export function CartContextProvider({ children }: CartProviderProps) {
   }
 
   function removeAllProducts(productId: number) {
-    console.log("REMOVENDO");
     setCart(cart.filter((item) => item.productId !== productId));
+  }
+
+  function clearCart() {
+    setCart([]);
   }
 
   function getTotalProductsPrice() {
@@ -79,6 +83,7 @@ export function CartContextProvider({ children }: CartProviderProps) {
         getTotalProductsPrice,
         removeAllProducts,
         removeProduct,
+        clearCart,
       }}
     >
       {children}

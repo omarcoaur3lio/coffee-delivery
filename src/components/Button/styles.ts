@@ -8,8 +8,6 @@ export const ButtonContainer = styled.button<ButtonProps>`
   align-items: center;
   justify-content: center;
 
-  /* width: 100%; */
-
   ${(props) =>
     props.variant === "primary" &&
     `
@@ -27,8 +25,19 @@ export const ButtonContainer = styled.button<ButtonProps>`
     
     transition: background-color 0.2s;
     
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: ${props.theme.colors.yellowDark};
+    }
+
+    &:disabled {
+      background-color: ${props.theme.colors.yellowDark};
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0;
     }
 
   `}

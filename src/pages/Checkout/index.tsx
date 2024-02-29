@@ -2,22 +2,62 @@ import { useTheme } from "styled-components";
 import { Container } from "../../styles/global";
 import { CheckoutContainer } from "./styles";
 
-import { MapPinLine, CurrencyDollar } from "@phosphor-icons/react";
+import {
+  MapPinLine,
+  CurrencyDollar,
+  ShoppingCart,
+} from "@phosphor-icons/react";
 import { PaymentMethodsForm } from "../../components/PaymentMethodsForm";
-import { Input } from "../../components/Input";
 import { CartItemDescription } from "../../components/CartItemDescription";
 import { Button } from "../../components/Button";
 import { CartContext } from "../../context/CartContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
+
+import { Toaster, toast } from "sonner";
+import { Link, useNavigate } from "react-router-dom";
+
+const deliveryFormValidationSchema = zod.object({
+  cep: zod.string().min(8, "CEP inválido").max(8, "CEP inválido"),
+  street: zod.string().min(1, "Rua inválida"),
+  number: zod.number().positive().min(1, "Número inválido"),
+  neighborhood: zod.string().min(1, "Bairro inválido"),
+  city: zod.string().min(1, "Cidade inválida"),
+  uf: zod.string().min(2, "UF inválida"),
+  complement: zod.string(),
+});
 
 export function Checkout() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
-  const { cart, getTotalProductsPrice } = useContext(CartContext);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+
+  const { cart, getTotalProductsPrice, clearCart } = useContext(CartContext);
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: zodResolver(deliveryFormValidationSchema),
+  });
 
   useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+    if (Object.keys(formState.errors).length > 0 && cart.length !== 0) {
+      toast.error("Preencha todos os campos obrigatórios");
+    }
+  }, [cart, formState]);
+
+  function handleSendOrder(data: any) {
+    if (!selectedPaymentMethod) {
+      toast.error("Selecione uma forma de pagamento");
+      return;
+    }
+    console.log("Enviando pedido...");
+    console.log("Forma de pagamento: " + selectedPaymentMethod);
+    console.log(data);
+    clearCart();
+    navigate("/success", { state: { selectedPaymentMethod, data } });
+  }
 
   function getTotal() {
     const total = Number(getTotalProductsPrice().replace(",", ".")) + 3.5;
@@ -30,8 +70,13 @@ export function Checkout() {
 
   return (
     <Container>
+      <Toaster position="top-center" />
       <CheckoutContainer>
-        <div className="formContainer">
+        <form
+          id="orderForm"
+          onSubmit={handleSubmit(handleSendOrder)}
+          className="formContainer"
+        >
           <h3>Complete seu pedido</h3>
           <div className="formCard">
             <div className="formCardHeader">
@@ -43,16 +88,51 @@ export function Checkout() {
             </div>
 
             <div className="inputsContainer">
-              <Input width="12.5rem" placeholder="CEP" />
-              <Input placeholder="Rua" />
+              <input
+                minLength={8}
+                maxLength={8}
+                placeholder="CEP"
+                className="input inputShort"
+                {...register("cep")}
+              />
+              <input
+                placeholder="Rua"
+                className="input"
+                {...register("street")}
+              />
               <div>
-                <Input width="12.5rem" placeholder="Número" />
-                <Input placeholder="Complemento" isOpcional />
+                <input
+                  className="input inputShort"
+                  placeholder="Número"
+                  {...register("number", { valueAsNumber: true })}
+                />
+                <div className="input">
+                  <input
+                    className="inputOptional"
+                    placeholder="Complemento"
+                    {...register("complement")}
+                  />
+                  <span>Opcional</span>
+                </div>
               </div>
               <div>
-                <Input width="12.5rem" placeholder="Bairro" />
-                <Input placeholder="Cidade" />
-                <Input width="3.75rem" placeholder="UF" />
+                <input
+                  className="input inputShort"
+                  placeholder="Bairro"
+                  {...register("neighborhood")}
+                />
+                <input
+                  className="input"
+                  placeholder="Cidade"
+                  {...register("city")}
+                />
+                <input
+                  type="text"
+                  maxLength={2}
+                  className="input inputExtraShort"
+                  placeholder="UF"
+                  {...register("uf")}
+                />
               </div>
             </div>
           </div>
@@ -69,21 +149,34 @@ export function Checkout() {
               </div>
             </div>
             <div className="paymentMethodsForm">
-              <PaymentMethodsForm />
+              <PaymentMethodsForm setPaymentMethod={setSelectedPaymentMethod} />
             </div>
           </div>
-        </div>
+        </form>
 
         <div className="cartContentContainer">
           <h3>Cafés selecionados</h3>
 
           <div className="cartContentCard">
-            {cart.map((product) => (
-              <CartItemDescription
-                key={product.productId}
-                productId={product.productId}
-              />
-            ))}
+            {cart.length === 0 ? (
+              <div className="emptyCartContainer">
+                <ShoppingCart size={32} color={theme.colors.baseLabel} />
+                <p>Seu carrinho esta vazio.</p>
+                <p>
+                  <Link className="link" to="/">
+                    Clique aqui
+                  </Link>{" "}
+                  para adicionar itens.
+                </p>
+              </div>
+            ) : (
+              cart.map((product) => (
+                <CartItemDescription
+                  key={product.productId}
+                  productId={product.productId}
+                />
+              ))
+            )}
             <div className="separator" />
 
             <div className="totalContainer">
@@ -101,7 +194,13 @@ export function Checkout() {
               </div>
             </div>
 
-            <Button title="Confirmar Pedido" variant="primary" />
+            <Button
+              disabled={cart.length === 0}
+              form="orderForm"
+              title="Confirmar Pedido"
+              type="submit"
+              variant="primary"
+            />
           </div>
         </div>
       </CheckoutContainer>
